@@ -1,0 +1,91 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Raleway:wght@300;500&display=swap');
+
+:root {
+  --oro: #D4AF37;
+  --plata: #C0C0C0;
+  --cobre: #B87333;
+  --fondo: #1A1A1A;
+  --texto: #F5F5F5;
+}
+
+body {
+  margin: 0;
+  font-family: 'Raleway', sans-serif;
+  background-color: var(--fondo);
+  color: var(--texto);
+}
+
+header {
+  background: linear-gradient(90deg, var(--oro), var(--cobre));
+  padding: 12px 20px;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-family: 'Cinzel', serif;
+  font-size: 1.5rem;
+  color: var(--plata);
+  text-shadow: 1px 1px 2px black;
+}
+
+ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+ul li a {
+  font-family: 'Cinzel', serif;
+  color: var(--texto);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+ul li a:hover {
+  color: var(--oro);
+}
+
+.cart {
+  background: var(--plata);
+  border: none;
+  color: var(--fondo);
+  font-size: 18px;
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+.cart:hover {
+  transform: scale(1.1);
+  background: var(--oro);
+  color: var(--fondo);
+}
+
+main {
+  margin: 30px;
+  padding: 40px;
+  border: 2px solid var(--cobre);
+  border-radius: 10px;
+  text-align: center;
+  background: rgba(255,255,255,0.03);
+}
+
+h2 {
+  font-family: 'Cinzel', serif;
+  font-size: 2rem;
+  color: var(--oro);
+  margin-bottom: 10px;
+}
+
+p {
+  color: var(--plata);
+  font-weight: 300;
+}
