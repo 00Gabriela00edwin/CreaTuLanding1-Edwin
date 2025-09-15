@@ -63,6 +63,7 @@ ul li a:hover {
   cursor: pointer;
   transition: transform 0.2s ease;
 }
+
 .cart:hover {
   transform: scale(1.1);
   background: var(--oro);
@@ -88,4 +89,23 @@ h2 {
 p {
   color: var(--plata);
   font-weight: 300;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--plata);
+  border-radius: 10px;
+  padding: 20px;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  border-color: var(--oro);
 }
