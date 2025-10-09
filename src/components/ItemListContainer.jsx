@@ -1,8 +1,13 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ItemCard from "./ItemCard";
-import { db } from "../firebase/config"; // Importar la configuración de Firebase
-import { collection, getDocs, query, where } from "firebase/firestore"; // Importar funciones de Firestore
+import { db } from "../firebase/config"; 
+import { collection, getDocs, query, where } from "firebase/firestore"; 
+
+// ----------------------------------------------------------------------
+// COMPONENTE CONTENEDOR (ItemListContainer)
+// Maneja el estado (loading, items) y la lógica de la base de datos (Firestore)
+// ----------------------------------------------------------------------
 
 export default function ItemListContainer({ greeting }) {
   const { categoryId } = useParams();
@@ -15,7 +20,7 @@ export default function ItemListContainer({ greeting }) {
     // 1. Referencia a la colección 'products' en Firestore
     const productsRef = collection(db, "products");
 
-    // 2. Crear la consulta
+    // 2. Crear la consulta: si existe categoryId, filtra, si no, trae todos.
     const q = categoryId 
         ? query(productsRef, where("category", "==", categoryId))
         : productsRef;
@@ -23,9 +28,10 @@ export default function ItemListContainer({ greeting }) {
     // 3. Ejecutar la consulta
     getDocs(q)
         .then((snapshot) => {
+            // Mapear los documentos para incluir el id de Firestore
             const productsDB = snapshot.docs.map((doc) => ({
-                id: doc.id, // El ID de Firestore es importante
-                ...doc.data(), // El resto de los datos
+                id: doc.id, 
+                ...doc.data(), 
             }));
             setItems(productsDB);
         })
@@ -36,24 +42,27 @@ export default function ItemListContainer({ greeting }) {
 
   }, [categoryId]);
 
+  // Renderizado condicional: Loader
   if (loading) return <p>Cargando productos...</p>;
   
-  // Renderizado condicional para "producto sin stock" o "sin productos para esta categoría"
+  // Renderizado condicional: No hay productos
   if (!items.length) return <p>No hay productos para esta categoría.</p>;
 
   return (
     <>
       <h2 style={{ margin: "1rem 0" }}>{greeting}</h2>
-      {/* Separación de responsabilidad: ItemList Container llama al Presentacional */}
+      {/* Llama al componente presentacional, pasándole los items */}
       <ItemList items={items} /> 
     </>
   );
 }
 
-// Componente Presentacional (ItemList)
+
+
 const ItemList = ({ items }) => (
     <div className="grid">
         {items.map((it) => (
+        
             <ItemCard key={it.id} item={it} />
         ))}
     </div>
