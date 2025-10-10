@@ -4,11 +4,6 @@ import ItemCard from "./ItemCard";
 import { db } from "../firebase/config"; 
 import { collection, getDocs, query, where } from "firebase/firestore"; 
 
-// ----------------------------------------------------------------------
-// COMPONENTE CONTENEDOR (ItemListContainer)
-// Maneja el estado (loading, items) y la lógica de la base de datos (Firestore)
-// ----------------------------------------------------------------------
-
 export default function ItemListContainer({ greeting }) {
   const { categoryId } = useParams();
   const [items, setItems] = useState([]);
@@ -17,18 +12,16 @@ export default function ItemListContainer({ greeting }) {
   useEffect(() => {
     setLoading(true);
     
-    // 1. Referencia a la colección 'products' en Firestore
+   
     const productsRef = collection(db, "products");
 
-    // 2. Crear la consulta: si existe categoryId, filtra, si no, trae todos.
     const q = categoryId 
         ? query(productsRef, where("category", "==", categoryId))
         : productsRef;
 
-    // 3. Ejecutar la consulta
     getDocs(q)
         .then((snapshot) => {
-            // Mapear los documentos para incluir el id de Firestore
+            
             const productsDB = snapshot.docs.map((doc) => ({
                 id: doc.id, 
                 ...doc.data(), 
@@ -42,10 +35,10 @@ export default function ItemListContainer({ greeting }) {
 
   }, [categoryId]);
 
-  // Renderizado condicional: Loader
+  
   if (loading) return <p>Cargando productos...</p>;
   
-  // Renderizado condicional: No hay productos
+  
   if (!items.length) return <p>No hay productos para esta categoría.</p>;
 
   return (
