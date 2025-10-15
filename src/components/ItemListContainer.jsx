@@ -44,7 +44,7 @@ export default function ItemListContainer({ greeting }) {
   return (
     <>
       <h2 style={{ margin: "1rem 0" }}>{greeting}</h2>
-      {/* Llama al componente presentacional, pasándole los items */}
+      
       <ItemList items={items} /> 
     </>
   );

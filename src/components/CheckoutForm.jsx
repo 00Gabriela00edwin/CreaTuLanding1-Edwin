@@ -30,20 +30,20 @@ const CheckoutForm = () => {
         };
 
         try {
-            // 1. Crear la orden en Firestore
+            
             const ordersRef = collection(db, "orders");
             const docRef = await addDoc(ordersRef, order);
             setOrderId(docRef.id);
 
-            // 2. Actualizar stock de los productos (Opcional pero buena práctica)
+    
             const updateStockPromises = cart.map(item => {
                 const itemRef = doc(db, "products", item.id);
-                // Asume que 'stock' es un campo numérico en tu producto
+                
                 return updateDoc(itemRef, { stock: item.stock - item.quantity });
             });
             await Promise.all(updateStockPromises);
 
-            // 3. Vaciar el carrito
+
             clear();
 
         } catch (error) {

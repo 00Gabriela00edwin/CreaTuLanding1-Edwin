@@ -8,12 +8,12 @@ const ItemCount = ({ stock, initial, onAdd }) => {
   const [count, setCount] = useState(initial);
 
   const incrementar = () => {
-    // Validación: No superar el stock
+
     if (count < stock) setCount(count + 1);
   };
 
   const decrementar = () => {
-    // Validación: Mínimo 1 unidad
+    
     if (count > 1) setCount(count - 1);
   };
 
@@ -23,11 +23,10 @@ const ItemCount = ({ stock, initial, onAdd }) => {
       <span style={{ margin: "0 10px" }}>{count}</span>
       <button onClick={incrementar} disabled={count === stock}>+</button>
       <br />
-      {/* Llamar a onAdd con la cantidad seleccionada */}
       <button 
         style={{ marginTop: "10px" }} 
         onClick={() => onAdd(count)}
-        disabled={stock === 0} // Deshabilitar si no hay stock
+        disabled={stock === 0} 
       >
         Agregar al carrito ({count})
       </button>

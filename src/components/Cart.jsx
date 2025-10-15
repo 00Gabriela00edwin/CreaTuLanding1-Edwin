@@ -5,38 +5,36 @@ import { Link } from "react-router-dom";
 const Cart = () => {
   const { cart, totalPrice, clear } = useCartContext();
 
-  // Renderizado condicional: carrito vacío
   if (cart.length === 0) {
     return (
-      <main style={{ textAlign: "center" }}>
+      <main className="empty-cart">
         <h2>🛒 Carrito vacío</h2>
         <p>Parece que no has agregado nada aún.</p>
-        <Link to="/" style={{ padding: "10px", backgroundColor: "#D4AF37", color: "black", textDecoration: "none", borderRadius: "5px" }}>
-            Volver al catálogo
-        </Link>
+        <Link className="btn btn-gold" to="/">Volver al catálogo</Link>
       </main>
     );
   }
 
+  const total = totalPrice()
+    ? Number(totalPrice()).toFixed(2)
+    : "0.00";
+
   return (
-    <main>
+    <main className="cart">
       <h2>Tu Carrito de Compras</h2>
-      <div className="grid" style={{ gridTemplateColumns: "1fr", gap: "20px" }}>
-        {cart.map(item => (
+      <div className="cart-items">
+        {cart.map((item) => (
           <CartItem key={item.id} item={item} />
         ))}
       </div>
-      
-      <div style={{ marginTop: "30px", borderTop: "1px solid #C0C0C0", paddingTop: "20px" }}>
-        <h3>Total de la compra: ${totalPrice().toFixed(2)}</h3>
-        <button 
-          onClick={clear}
-          style={{ backgroundColor: '#B87333', color: 'white', marginRight: '15px' }}
-        >
+
+      <div className="cart-summary">
+        <h3>Total de la compra: ${total}</h3>
+        <button onClick={clear} className="btn btn-bronze">
           Vaciar carrito
         </button>
-        <Link to="/checkout" style={{ padding: "10px", backgroundColor: "#D4AF37", color: "black", textDecoration: "none", borderRadius: "5px" }}>
-            Finalizar Compra
+        <Link className="btn btn-gold" to="/checkout">
+          Finalizar Compra
         </Link>
       </div>
     </main>

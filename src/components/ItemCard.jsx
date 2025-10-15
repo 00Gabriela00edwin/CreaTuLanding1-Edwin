@@ -1,24 +1,26 @@
+
 import { Link } from "react-router-dom";
-import bombillaBronce from "../assets/messibronce.jpg";
-import bombillaLuna from "../assets/lunabronce.jpg";
-import bombillaReel from "../assets/reelbronce.jpg";
+import bombillamessi from "../assets/messi.jpg";
+import bombillaluna from "../assets/luna.jpg";
+import bombillacorazon from "../assets/corazon.jpg";
+import bombillapesca from "../assets/pesca.jpg";
+import bombillapesca2 from "../assets/pesca2.jpg";
+import bombillaguitarra from "../assets/guitarra.jpg";
+import bombillagato from "../assets/gato.jpg";
 
-const ItemCard = ({ item }) => {
-  
-  let imageSrc;
-  switch (item.name) {
-    case "Bombilla de bronce":
-      imageSrc = <messibronce className="jpg">MESSI</messibronce>;
-      break;
-    case "Bombilla Luna":
-      imageSrc = <lunabronce className="jpg">LUNA</lunabronce>;
-      break;
-    case "Bombilla Reel":
-      imageSrc = <reelbronce className="jpg">REEL</reelbronce>;
-      break;
-   
-  }
-
+const IMAGE_MAP = {
+    "bombilla messi": bombillamessi,
+    "bombilla luna": bombillaluna,
+    "bombilla corazon": bombillacorazon,
+    "bombilla pesca": bombillapesca,
+    "bombilla pesca2": bombillapesca2,
+    "bombilla guitarra":bombillaguitarra,
+    "bombilla gato": bombillagato,
+  } 
+    
+function ItemCard({item}){
+let itemNameKey = item.name.toLowerCase();
+    const imageSrc = IMAGE_MAP[itemNameKey]; 
   return (
     <div className="card">
       <img className="item-image" src={imageSrc} alt={item.name} />
@@ -26,8 +28,8 @@ const ItemCard = ({ item }) => {
       <p>{item.material}</p>
       <p>${item.price}</p>
       <Link to={`/item/${item.id}`} className="item-button">Ver detalle</Link>
-    </div>
-  );
-};
-
+    </div>);
+}
 export default ItemCard;
+
+
