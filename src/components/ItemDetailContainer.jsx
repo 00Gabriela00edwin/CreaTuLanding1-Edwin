@@ -1,47 +1,32 @@
 
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { db } from "../firebase/config";
+import { useCartContext } from "../context/CartContext";
 import { doc, getDoc } from "firebase/firestore";
-import ItemDetail from "./ItemDetail"; // Importar componente de presentación ItemDetail
+import { db } from "../firebase/config";
+import ItemDetail from "./ItemDetail";
 
 const ItemDetailContainer = () => {
+  const [product, setProduct] = useState(null);
+  const [isAdded, setIsAdded] = useState(false);
+  const { addItem } = useCartContext();
   const { id } = useParams();
-  const [item, setItem] = useState(null);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setLoading(true);
-    // 1. Referencia al documento 'id' en la colección 'products'
-    const docRef = doc(db, "products", id);
-
-    // 2. Obtener el documento
-    getDoc(docRef)
-        .then((docSnapshot) => {
-            if (docSnapshot.exists()) {
-                setItem({ id: docSnapshot.id, ...docSnapshot.data() });
-            } else {
-                console.log("No such document!");
-                setItem(null);
-            }
-        })
-        .catch((error) => console.error("Error al obtener detalle:", error))
-        .finally(() => {
-            setLoading(false);
-        });
-
+    const ref = doc(db, "products", id);
+    getDoc(ref).then((res) => {
+      setProduct({ id: res.id, ...res.data() });
+    });
   }, [id]);
 
-  if (loading) return <p>Cargando detalle...</p>;
-  
-  if (!item) return <p>Producto no encontrado.</p>;
+  const handleOnAdd = (quantity) => {
+    setIsAdded(true);
+    addItem(product, quantity);
+  };
 
-  return (
-    <main>
-      {/* Separación de responsabilidad: ItemDetail Container llama al Presentacional */}
-      <ItemDetail item={item} />
-    </main>
-  );
+  if (!product) return <p>Cargando producto...</p>;
+
+  return <ItemDetail product={product} isAdded={isAdded} onAdd={handleOnAdd} />;
 };
 
 export default ItemDetailContainer;
