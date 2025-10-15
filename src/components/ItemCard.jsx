@@ -4,7 +4,6 @@ import bombillamessi from "../assets/messi.jpg";
 import bombillaluna from "../assets/luna.jpg";
 import bombillacorazon from "../assets/corazon.jpg";
 import bombillapesca from "../assets/pesca.jpg";
-import bombillapescados from "../assets/pescados.jpg";
 import bombillaguitarra from "../assets/guitarra.jpg";
 import bombillagato from "../assets/gato.jpg";
 
@@ -13,7 +12,6 @@ const IMAGE_MAP = {
     "bombilla luna": bombillaluna,
     "bombilla corazon": bombillacorazon,
     "bombilla pesca": bombillapesca,
-    "bombilla pescados": bombillapescados,
     "bombilla guitarra":bombillaguitarra,
     "bombilla gato": bombillagato,
   } 
