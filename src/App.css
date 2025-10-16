@@ -131,12 +131,14 @@ input {
 
 .cart-item h4 {
     margin: 0;
-    color: var(--oro);
+    color: var(#716a6a);
 }
 
 .cart-item p {
     margin: 0;
     font-size: 0.9rem;
+    color: #2b2b2b;
+
 }
 .card {
   background: rgba(255,255,255,0.05);
@@ -174,4 +176,25 @@ input {
 .item-button:hover {
   background-color: #B87333;
   color: white;
+}
+.cart-container {
+  color: #222; 
+}
+
+.cart-container h2 {
+  color: #1a1a1a;
+  font-weight: bold;
+}
+
+.cart-container p {
+  color: #2b2b2b;
+}
+
+.cart-container a {
+  color: #D4AF37;
+  text-decoration: none;
+}
+
+.cart-container a:hover {
+  color: #b8952c;
 }
