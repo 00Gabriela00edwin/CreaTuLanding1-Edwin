@@ -1,20 +1,29 @@
 import { Link } from "react-router-dom";
 import CartWidget from "./CartWidget";
+import logo from "../assets/logo.png";
 
 const NavBar = () => {
   return (
     <header>
       <nav>
-        
-        <Link to="/" className="logo">AYG Bombillas</Link> 
+       
+<Link to="/" className="logo" style={{ display: "flex", alignItems: "center", textDecoration: "none", color: "black" }}>
+  <img 
+    src={logo} 
+    alt="Logo AYG Bombillas" 
+    style={{ width: "100px", height: "auto", marginRight: "12px" }} 
+  />
+</Link>
+
+
 
         <ul>
-        
           <li><Link to="/category/alpaca">Alpaca</Link></li>
           <li><Link to="/category/bronce">Bronce</Link></li>
-          <li><Link to="/category/cobre">Cobre</Link></li>
+        
         </ul>
-        <CartWidget /> 
+
+        <CartWidget />
       </nav>
     </header>
   );

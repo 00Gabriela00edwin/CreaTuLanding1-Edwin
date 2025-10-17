@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useCartContext } from "../context/CartContext";
 import { db } from "../firebase/config";
@@ -8,7 +9,7 @@ const CheckoutForm = () => {
     const [buyer, setBuyer] = useState({ name: "", phone: "", email: "" });
     const [orderId, setOrderId] = useState(null);
     const [loading, setLoading] = useState(false);
-
+     const navigate = useNavigate ();
     const handleChange = (e) => {
         setBuyer({ ...buyer, [e.target.name]: e.target.value });
     };
