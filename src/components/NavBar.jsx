@@ -15,8 +15,6 @@ const NavBar = () => {
   />
 </Link>
 
-
-
         <ul>
           <li><Link to="/category/alpaca">Alpaca</Link></li>
           <li><Link to="/category/bronce">Bronce</Link></li>
